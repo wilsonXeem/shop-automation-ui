@@ -12,7 +12,8 @@ function DailyTransactionpage() {
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
-      .then((json) => setData(json.products));
+      .then((json) => setData(json.products))
+    .catch(e=>alert(e))
   }, []);
   function handleClick() {
     const addedProduct = data.map((x) => x.added);
