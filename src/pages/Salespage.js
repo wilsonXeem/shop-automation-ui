@@ -28,6 +28,15 @@ function Salespage() {
       })
       .catch((e) => setLoading(true));
   }
+
+  async function deleteGood() {
+    await fetch(`http://localhost:8000/products/${goodId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => navigate("/admin"))
+      .catch((e) => setLoading(true));
+  }
   function handleClick() {
     setAddedd(good.transactionHistory.added);
     setReturne(good.transactionHistory.returned);
@@ -115,7 +124,7 @@ function Salespage() {
         <Loading />
       ) : (
         <div>
-          <h1>
+          <h1 style={{ textTransform: "uppercase" }}>
             {good.name}{" "}
             <input
               type="text"
@@ -130,7 +139,19 @@ function Salespage() {
           <hr />
           <section className="good-sec">
             <div className="good-des">
+              <div>
+                <button
+                  style={{ background: "red" }}
+                  className="btn"
+                  onClick={deleteGood}
+                >
+                  Delete Product
+                </button>
+              </div>
               <h3>Total stock available:{good.numberAvailable} </h3>
+              <h3>
+                Total price available: N{good.numberAvailable * good.unitPrice}
+              </h3>
               <h3>
                 Unit Price: N{good.unitPrice}{" "}
                 <input
@@ -143,11 +164,8 @@ function Salespage() {
                   Change
                 </button>
               </h3>
-              <h3>
-                Total price available: N{good.numberAvailable * good.unitPrice}
-              </h3>
               <div className="inp">
-                Number of goods to add:{" "}
+                Number of Products to add:{" "}
                 <input
                   type="number"
                   id="addbtn"
@@ -157,7 +175,7 @@ function Salespage() {
                 <button onClick={addGood}>ADD</button>
               </div>
               <div className="inp">
-                Number of goods to return:{" "}
+                Number of Products to return:{" "}
                 <input
                   type="number"
                   id="returnbtn"
@@ -167,7 +185,7 @@ function Salespage() {
                 <button onClick={returnGood}>RETURN</button>
               </div>
               <div className="inp">
-                Number of goods sold:{" "}
+                Number of Products sold:{" "}
                 <input
                   type="number"
                   id="salebtn"
@@ -178,33 +196,39 @@ function Salespage() {
               </div>
             </div>
             <div className="good-trans">
-              <h1>Good Transaction History</h1>
+              <h1>Product Transaction History</h1>
               <button onClick={handleClick}>Click to view good history</button>
               <div className="added">
-                <h3>Goods Added:</h3>
+                <h3 style={{ color: "green", marginBottom: "0px" }}>
+                  Products Added:
+                </h3>
                 {addedd.map((item, i) => {
                   return (
-                    <p key={i}>
+                    <p style={{ margin: "2px" }} key={i}>
                       {item.dateAdded}-- <b>{item.amount}pcs</b>
                     </p>
                   );
                 })}
               </div>
               <div className="sold">
-                <h3>Goods Sold:</h3>
+                <h3 style={{ color: "red", marginBottom: "0px" }}>
+                  Products Sold:
+                </h3>
                 {soldd.map((item, i) => {
                   return (
-                    <p key={i}>
+                    <p style={{ margin: "2px" }} key={i}>
                       {item.dateSold}-- <b>{item.amount}pcs</b>
                     </p>
                   );
                 })}
               </div>
               <div className="returned">
-                <h3>Goods Returned:</h3>
+                <h3 style={{ color: "orange", marginBottom: "0px" }}>
+                  Products Returned:
+                </h3>
                 {returne.map((item, i) => {
                   return (
-                    <p key={i}>
+                    <p style={{ margin: "2px" }} key={i}>
                       {item.dateReturned}-- <b>{item.amount}pcs</b>
                     </p>
                   );

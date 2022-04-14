@@ -14,20 +14,22 @@ function ListofGoods() {
       .then((json) => setData(json.products));
   }, []);
   async function addGood() {
-    await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        unitPrice: price,
-        numberAvailable: number,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then(() => window.location.reload())
-      .catch((e) => console.log(e));
+    if (name !== "" && price !== "" && number !== "") {
+      await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          unitPrice: price,
+          numberAvailable: number,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then(() => window.location.reload())
+        .catch((e) => console.log(e));
+    }
   }
   return (
     <>
@@ -43,7 +45,7 @@ function ListofGoods() {
             >
               <h1>{item.name}</h1>
               <h3>N{item.unitPrice}</h3>
-              <h3>{item.numberAvailable} available</h3>
+              <h3>{item.numberAvailable} pcs available</h3>
             </div>
           );
         })}

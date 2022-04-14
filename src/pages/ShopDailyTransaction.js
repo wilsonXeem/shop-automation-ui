@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function DailyTransactionpage() {
+function ShopDailyTransaction() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [added, setAdded] = useState([]);
@@ -9,11 +9,13 @@ function DailyTransactionpage() {
   const [returned, setReturned] = useState([]);
   const [totalSale, setSale] = useState("");
   const url = "http://localhost:8000/products/transactions";
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((json) => setData(json.products));
   }, []);
+
   function handleClick() {
     const addedProduct = data.map((x) => x.added);
     const soldProduct = data.map((x) => x.sold);
@@ -37,8 +39,7 @@ function DailyTransactionpage() {
           return x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           });
@@ -50,8 +51,7 @@ function DailyTransactionpage() {
           x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           })
@@ -71,15 +71,14 @@ function DailyTransactionpage() {
           return x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           });
         })}
       </div>
       <div style={{ textAlign: "center", marginTop: "1rem" }}>
-        <button className="btn" onClick={() => navigate("/admin")}>
+        <button className="btn" onClick={() => navigate("/")}>
           Back to Home
         </button>
       </div>
@@ -87,4 +86,4 @@ function DailyTransactionpage() {
   );
 }
 
-export default DailyTransactionpage;
+export default ShopDailyTransaction;

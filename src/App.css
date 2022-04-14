@@ -10,6 +10,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
   grid-gap: 20px;
+  padding-bottom: 1rem;
 }
 
 .sales {
@@ -18,6 +19,10 @@
 
 .good {
   border: solid 1px green;
+}
+
+.good h1{
+  text-transform: uppercase;
 }
 
 /* .sales{
@@ -91,6 +96,11 @@ button:hover {
 
 .new-good h3{
   margin: 5px;
+  width: 100%;
+}
+
+.new-good input{
+  width: 80%;
 }
 
 .new-good button{
@@ -102,6 +112,10 @@ button:hover {
   margin-bottom: 5px;
   width: 4rem;
   height: 1.3rem;
+}
+
+.trr{
+  border-bottom: solid black 1px;
 }
 
 @media screen and (max-width: 1290px) {
