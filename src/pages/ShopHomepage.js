@@ -5,7 +5,7 @@ import ShopCurrentDate from "../components/ShopCurrentDate";
 function ShopHomepage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const url = "http://localhost:8000/products/";
+  const url = "https://agroshopify.herokuapp.com/products/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())

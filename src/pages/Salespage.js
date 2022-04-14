@@ -20,7 +20,7 @@ function Salespage() {
     fetchData();
   }, [goodId]);
   async function fetchData() {
-    await fetch(`http://localhost:8000/products/${goodId}`)
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}`)
       .then((response) => response.json())
       .then((json) => {
         setGood(json);
@@ -30,7 +30,7 @@ function Salespage() {
   }
 
   async function deleteGood() {
-    await fetch(`http://localhost:8000/products/${goodId}`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -44,7 +44,7 @@ function Salespage() {
   }
 
   async function addGood() {
-    await fetch(`http://localhost:8000/products/${goodId}/added`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}/added`, {
       method: "POST",
       body: JSON.stringify({
         added: add,
@@ -59,22 +59,25 @@ function Salespage() {
   }
 
   async function returnGood() {
-    await fetch(`http://localhost:8000/products/${goodId}/returned`, {
-      method: "POST",
-      body: JSON.stringify({
-        returned: returnn,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+    await fetch(
+      `https://agroshopify.herokuapp.com/products/${goodId}/returned`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          returned: returnn,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then(() => window.location.reload())
       .catch((e) => console.log(e));
   }
 
   async function soldGood() {
-    await fetch(`http://localhost:8000/products/${goodId}/sold`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}/sold`, {
       method: "POST",
       body: JSON.stringify({
         sold: sale,
@@ -89,7 +92,7 @@ function Salespage() {
   }
 
   async function editName() {
-    await fetch(`http://localhost:8000/products/${goodId}/name`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}/name`, {
       method: "PATCH",
       body: JSON.stringify({
         name: name,
@@ -104,7 +107,7 @@ function Salespage() {
   }
 
   async function editPrice() {
-    await fetch(`http://localhost:8000/products/${goodId}/price`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}/price`, {
       method: "PATCH",
       body: JSON.stringify({
         unitPrice: price,

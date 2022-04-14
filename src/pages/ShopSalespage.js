@@ -16,7 +16,7 @@ function ShopSalespage() {
     fetchData();
   }, [goodId]);
   async function fetchData() {
-    await fetch(`http://localhost:8000/products/${goodId}`)
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}`)
       .then((response) => response.json())
       .then((json) => {
         setGood(json);
@@ -31,7 +31,7 @@ function ShopSalespage() {
     setSoldd(good.transactionHistory.sold);
   }
   async function soldGood() {
-    await fetch(`http://localhost:8000/products/${goodId}/sold`, {
+    await fetch(`https://agroshopify.herokuapp.com/products/${goodId}/sold`, {
       method: "POST",
       body: JSON.stringify({
         sold: sale,

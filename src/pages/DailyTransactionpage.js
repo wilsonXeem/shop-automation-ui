@@ -8,7 +8,7 @@ function DailyTransactionpage() {
   const [sold, setSold] = useState([]);
   const [returned, setReturned] = useState([]);
   const [totalSale, setSale] = useState("");
-  const url = "http://localhost:8000/products/transactions";
+  const url = "https://agroshopify.herokuapp.com/products/transactions";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -37,8 +37,7 @@ function DailyTransactionpage() {
           return x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           });
@@ -50,8 +49,7 @@ function DailyTransactionpage() {
           x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           })
@@ -59,9 +57,9 @@ function DailyTransactionpage() {
         <h3 style={{ marginBottom: "0px" }}>
           Total Sale: N
           {totalSale.length > 3
-            ? totalSale.substring(0, 2) +
+            ? totalSale.substring(0, totalSale.length - 3) +
               "," +
-              totalSale.substring(2, totalSale.length)
+              totalSale.substring(totalSale.length - 3, totalSale.length)
             : totalSale}
         </h3>
       </div>
@@ -71,8 +69,7 @@ function DailyTransactionpage() {
           return x.map((y, i) => {
             return (
               <p style={{ margin: "2px" }} key={i}>
-                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b>{" "}
-                {y.remark}
+                <b>~ {y.amount}Pcs</b> of <b>{y.name}</b> {y.remark}
               </p>
             );
           });

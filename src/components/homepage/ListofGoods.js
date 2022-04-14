@@ -7,7 +7,7 @@ function ListofGoods() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [number, setNumber] = useState("");
-  const url = "http://localhost:8000/products/";
+  const url = "https://agroshopify.herokuapp.com/products/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())

@@ -8,7 +8,7 @@ function ShopDailyTransaction() {
   const [sold, setSold] = useState([]);
   const [returned, setReturned] = useState([]);
   const [totalSale, setSale] = useState("");
-  const url = "http://localhost:8000/products/transactions";
+  const url = "https://agroshopify.herokuapp.com/products/transactions";
 
   useEffect(() => {
     fetch(url)
