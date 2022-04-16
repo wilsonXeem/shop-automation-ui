@@ -153,10 +153,32 @@ function Salespage() {
               </div>
               <h3>Total stock available:{good.numberAvailable} </h3>
               <h3>
-                Total price available: N{good.numberAvailable * good.unitPrice}
+                Total price available: N
+                {String(good.numberAvailable * good.unitPrice).length > 3
+                  ? String(good.numberAvailable * good.unitPrice).substring(
+                      0,
+                      String(good.numberAvailable * good.unitPrice).length - 3
+                    ) +
+                    "," +
+                    String(good.numberAvailable * good.unitPrice).substring(
+                      String(good.numberAvailable * good.unitPrice).length - 3,
+                      String(good.numberAvailable * good.unitPrice).length
+                    )
+                  : String(good.numberAvailable * good.unitPrice)}
               </h3>
               <h3>
-                Unit Price: N{good.unitPrice}{" "}
+                Unit Price: N
+                {String(good.unitPrice).length > 3
+                  ? String(good.unitPrice).substring(
+                      0,
+                      String(good.unitPrice).length - 3
+                    ) +
+                    "," +
+                    String(good.unitPrice).substring(
+                      String(good.unitPrice).length - 3,
+                      String(good.unitPrice).length
+                    )
+                  : String(good.unitPrice)}{" "}
                 <input
                   type="text"
                   placeholder="Edit Unit Price of Good"

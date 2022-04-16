@@ -13,7 +13,7 @@ function DailyTransactionpage() {
     fetch(url)
       .then((response) => response.json())
       .then((json) => setData(json.products))
-    .catch(e=>alert(e))
+      .catch((e) => alert(e));
   }, []);
   function handleClick() {
     const addedProduct = data.map((x) => x.added);
@@ -23,7 +23,9 @@ function DailyTransactionpage() {
     setAdded(addedProduct);
     setSold(soldProduct);
     setReturned(returnedProduct);
-    setSale(sale.reduce((x, y) => x + y).toString());
+    if (sale[0] !== undefined) {
+      setSale(sale.reduce((x, y) => x + y).toString());
+    }
   }
 
   return (
