@@ -11,6 +11,7 @@ function ShopSalespage() {
   const [loading, setLoading] = useState(false);
   const { goodId } = useParams();
   const [sale, setSale] = useState("");
+  const [returnn, setReturnn] = useState("");
   useEffect(() => {
     setLoading(true);
     fetchData();
@@ -40,6 +41,24 @@ function ShopSalespage() {
         "Content-type": "application/json",
       },
     })
+      .then((response) => response.json())
+      .then(() => window.location.reload())
+      .catch((e) => console.log(e));
+  }
+
+  async function returnGood() {
+    await fetch(
+      `https://agroshopify.herokuapp.com/products/${goodId}/returned`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          returned: returnn,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then(() => window.location.reload())
       .catch((e) => console.log(e));
@@ -94,6 +113,16 @@ function ShopSalespage() {
                   value={sale}
                 />
                 <button onClick={soldGood}>SOLD</button>
+              </div>
+              <div className="inp">
+                Number of Products to return:{" "}
+                <input
+                  type="number"
+                  id="returnbtn"
+                  onChange={(e) => setReturnn(e.target.value)}
+                  value={returnn}
+                />
+                <button onClick={returnGood}>RETURN</button>
               </div>
             </div>
             <div className="good-trans">
