@@ -1,30 +1,18 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Salespage from "./pages/Salespage";
-import DailyTransactionpage from "./pages/DailyTransactionpage";
-import ShopHomepage from "./pages/ShopHomepage";
-import ShopSalespage from "./pages/ShopSalespage";
-import ShopDailyTransaction from "./pages/ShopDailyTransaction";
+import Purchase from "./pages/Purchase";
+import DailyTransaction from "./pages/DailyTransaction";
+import Expense from "./pages/Expense";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/admin" element={<Homepage />} />
-        <Route exact path="/" element={<ShopHomepage />} />
-        <Route exact path="/admin/salespage/:goodId" element={<Salespage />} />
-        <Route exact path="/salespage/:goodId" element={<ShopSalespage />} />
-        <Route
-          exact
-          path="/admin/daily-transaction"
-          element={<DailyTransactionpage />}
-        />
-        <Route
-          exact
-          path="/daily-transaction"
-          element={<ShopDailyTransaction />}
-        />
+        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/purchase" element={<Purchase />} />
+        <Route exact path="/daily-transaction" element={<DailyTransaction />} />
+        <Route exact path="/expenses" element={<Expense />} />
       </Routes>
     </Router>
   );

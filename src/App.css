@@ -1,84 +1,29 @@
-.home {
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
   width: 100%;
-  text-align: center;
-  /* padding: 2rem; */
-  /* display: flex;
-  flex-direction: column; */
 }
 
-.listofgoods {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-  grid-gap: 20px;
-  padding-bottom: 1rem;
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 
-/* .sales {
-  padding-left: 1rem;
-} */
-
-.good {
-  border: solid 1px green;
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
 
-.good h1{
-  text-transform: uppercase;
-}
-
-/* .sales{
-  text-align: center;
-} */
-
-.good-sec {
-  display: grid;
-  grid-template-columns: 40% 1fr;
-}
-
-.inp {
-  margin: 1rem 0rem;
-}
-
-.inp input {
-  margin-right: 1%;
+.btn {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 3px;
   height: 1.2rem;
-}
-
-.inp button {
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  height: 1.5rem;
+  width: 30%;
   font-weight: bolder;
-}
-
-.good-trans button {
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  height: 1.5rem;
-  font-weight: bolder;
-}
-
-.btn{
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  height: 1.5rem;
-  font-weight: bolder;
-}
-
-.good-des{
-  padding: 0rem 1rem;
-  border-left: solid black 1px;
-  border-bottom: solid black 1px;
-}
-
-.good-trans {
-  border-left: solid black 1px;
-  padding: 0rem 1rem;
+  margin: 5px;
 }
 
 button:hover {
@@ -87,40 +32,7 @@ button:hover {
   border: solid black 1px;
 }
 
-.new-good{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.new-good h3{
-  margin: 5px;
-  width: 100%;
-}
-
-.new-good input{
-  width: 80%;
-}
-
-.new-good button{
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  font-weight: bolder;
-  margin-bottom: 5px;
-  width: 4rem;
-  height: 1.3rem;
-}
-
-.trr{
-  border-bottom: solid black 1px;
-}
-
-@media screen and (max-width: 1290px) {
-  .good-sec {
-    display: flex;
-    flex-direction: column;
-  }
+input {
+  height: 1.5rem;
+  width: 90%;
 }

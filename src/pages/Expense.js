@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
-function ShopHomepage() {
+function Expense() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
@@ -31,7 +31,7 @@ function ShopHomepage() {
   }
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Available Stock</h1>
+      <h1>Expenses</h1>
       <hr />
       <section>
         <table>
@@ -127,4 +127,4 @@ function ShopHomepage() {
   );
 }
 
-export default ShopHomepage;
+export default Expense;

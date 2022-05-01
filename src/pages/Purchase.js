@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ShopHomepage() {
+function Purchase() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [qty, setQty] = useState();
   const [cost, setCost] = useState("");
+  const purchases = data.filter(
+    (x) => x.time === new Date().toLocaleDateString()
+  );
   // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "http://localhost:8000/products/";
+  const url = "http://localhost:8000/purchases/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
-        setData(json.products);
+        setData(json.purchases);
       });
   }, []);
   function handleSubmit() {
-    fetch("http://localhost:8000/products/", {
+    fetch("http://localhost:8000/purchases/", {
       method: "POST",
       body: JSON.stringify({
         name: name,
@@ -30,10 +33,13 @@ function ShopHomepage() {
     }).then(() => window.location.reload());
   }
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Available Stock</h1>
-      <hr />
-      <section>
+    <>
+      <div style={{ textAlign: "center" }}>
+        <h1>Purchases</h1>
+        <hr />
+        <button className="btn" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
         <table>
           <thead>
             <tr>
@@ -41,13 +47,13 @@ function ShopHomepage() {
               <th>Name</th>
               <th>Quantity</th>
               <th>Unit cost</th>
-              <th>Total</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((item, i) => {
+            {purchases.filter((item, i) => {
               return (
-                <tr key={i}>
+                <tr key={i} onClick={() => navigate(`/salespage/${item._id}`)}>
                   <td>{i + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
@@ -112,19 +118,18 @@ function ShopHomepage() {
             </tr>
           </tbody>
         </table>
-      </section>
-
-      <div>
-        <button
-          className="btn"
-          onClick={handleSubmit}
-          style={{ width: "30%", height: "1.5rem", fontSize: "large" }}
-        >
-          Submit
-        </button>
+        <div>
+          <button
+            className="btn"
+            onClick={handleSubmit}
+            style={{ width: "30%", height: "1.5rem", fontSize: "large" }}
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default ShopHomepage;
+export default Purchase;
