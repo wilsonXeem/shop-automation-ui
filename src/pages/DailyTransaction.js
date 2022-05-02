@@ -38,13 +38,13 @@ function ShopDailyTransaction() {
         <hr />
         <div style={{ width: "100%" }}>
           <button className="btn" onClick={() => navigate("/")}>
-            Go to Stock
+            Stock
           </button>
           <button className="btn" onClick={() => navigate("/purchases")}>
-            Go to Purchases
+            Purchases
           </button>
           <button className="btn" onClick={() => navigate("/expenses")}>
-            Go to Expenses
+            Expenses
           </button>
         </div>
         <table>

@@ -35,13 +35,13 @@ function Expense() {
       <hr />
       <div style={{ width: "100%" }}>
         <button className="btn" onClick={() => navigate("/")}>
-          Go to Stock
+          Stock
         </button>
         <button className="btn" onClick={() => navigate("/purchases")}>
-          Go to Purchases
+          Purchases
         </button>
         <button className="btn" onClick={() => navigate("/daily-transaction")}>
-          Go to Sales
+          Sales
         </button>
       </div>
       <section>

@@ -35,16 +35,16 @@ function Purchase() {
         <hr />
         <div style={{ width: "100%" }}>
           <button className="btn" onClick={() => navigate("/")}>
-            Go to Stock
+            Stock
           </button>
           <button
             className="btn"
             onClick={() => navigate("/daily-transaction")}
           >
-            Go to Sales
+            Sales
           </button>
           <button className="btn" onClick={() => navigate("/expenses")}>
-            Go to Expenses
+            Expenses
           </button>
         </div>
         <table>

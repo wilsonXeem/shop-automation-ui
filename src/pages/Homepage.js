@@ -35,13 +35,13 @@ function ShopHomepage() {
       <hr />
       <div style={{ width: "100%" }}>
         <button className="btn" onClick={() => navigate("/daily-transaction")}>
-          Go to Sales
+          Sales
         </button>
         <button className="btn" onClick={() => navigate("/purchases")}>
-          Go to Purchases
+          Purchases
         </button>
         <button className="btn" onClick={() => navigate("/expenses")}>
-          Go to Expenses
+          Expenses
         </button>
       </div>
       <section>
