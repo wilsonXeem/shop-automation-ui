@@ -8,7 +8,7 @@ function Expense() {
   const [salaries, setSalaries] = useState();
   const [others, setOthers] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "http://localhost:8000/expenses/";
+  const url = "https://agroshopify.herokuapp.com/expenses/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -17,7 +17,7 @@ function Expense() {
       });
   }, []);
   function handleSubmit() {
-    fetch("http://localhost:8000/expenses/", {
+    fetch("https://agroshopify.herokuapp.com/expenses/", {
       method: "POST",
       body: JSON.stringify({
         charges: charges,

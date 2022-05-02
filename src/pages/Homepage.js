@@ -8,7 +8,7 @@ function ShopHomepage() {
   const [qty, setQty] = useState();
   const [cost, setCost] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "http://localhost:8000/products/";
+  const url = "https://agroshopify.herokuapp.com/products/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -17,7 +17,7 @@ function ShopHomepage() {
       });
   }, []);
   function handleSubmit() {
-    fetch("http://localhost:8000/products/", {
+    fetch("https://agroshopify.herokuapp.com/products/", {
       method: "POST",
       body: JSON.stringify({
         name: name,

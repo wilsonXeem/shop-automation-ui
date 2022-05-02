@@ -7,11 +7,7 @@ function Purchase() {
   const [name, setName] = useState("");
   const [qty, setQty] = useState();
   const [cost, setCost] = useState("");
-  // const purchases = data.filter(
-  //   (x) => x.time === new Date().toLocaleDateString()
-  // );
-  // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "http://localhost:8000/purchases/";
+  const url = "https://agroshopify.herokuapp.com/purchases/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -20,7 +16,7 @@ function Purchase() {
       });
   }, []);
   function handleSubmit() {
-    fetch("http://localhost:8000/purchases/", {
+    fetch("https://agroshopify.herokuapp.com/purchases/", {
       method: "POST",
       body: JSON.stringify({
         name: name,
