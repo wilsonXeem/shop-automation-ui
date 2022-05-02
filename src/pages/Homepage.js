@@ -33,6 +33,17 @@ function ShopHomepage() {
     <div style={{ textAlign: "center" }}>
       <h1>Available Stock</h1>
       <hr />
+      <div style={{ width: "100%" }}>
+        <button className="btn" onClick={() => navigate("/daily-transaction")}>
+          Go to Sales
+        </button>
+        <button className="btn" onClick={() => navigate("/purchases")}>
+          Go to Purchases
+        </button>
+        <button className="btn" onClick={() => navigate("/expenses")}>
+          Go to Expenses
+        </button>
+      </div>
       <section>
         <table>
           <thead>

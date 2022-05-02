@@ -1,28 +1,28 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Expense() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const [qty, setQty] = useState();
-  const [cost, setCost] = useState("");
+  const [charges, setCharges] = useState("");
+  const [salaries, setSalaries] = useState();
+  const [others, setOthers] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "http://localhost:8000/products/";
+  const url = "http://localhost:8000/expenses/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
-        setData(json.products);
+        setData(json.expenses);
       });
   }, []);
   function handleSubmit() {
-    fetch("http://localhost:8000/products/", {
+    fetch("http://localhost:8000/expenses/", {
       method: "POST",
       body: JSON.stringify({
-        name: name,
-        unitCost: cost,
-        quantity: qty,
+        charges: charges,
+        salaries: salaries,
+        others: others,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -33,15 +33,25 @@ function Expense() {
     <div style={{ textAlign: "center" }}>
       <h1>Expenses</h1>
       <hr />
+      <div style={{ width: "100%" }}>
+        <button className="btn" onClick={() => navigate("/")}>
+          Go to Stock
+        </button>
+        <button className="btn" onClick={() => navigate("/purchases")}>
+          Go to Purchases
+        </button>
+        <button className="btn" onClick={() => navigate("/daily-transaction")}>
+          Go to Sales
+        </button>
+      </div>
       <section>
         <table>
           <thead>
             <tr>
               <th>S/N</th>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Unit cost</th>
-              <th>Total</th>
+              <th>Labour Charges</th>
+              <th>Salaries</th>
+              <th>Others</th>
             </tr>
           </thead>
           <tbody>
@@ -49,35 +59,47 @@ function Expense() {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}</td>
                   <td>
                     N
-                    {String(item.unitCost).length > 3
-                      ? String(item.unitCost).substring(
+                    {String(item.charges).length > 3
+                      ? String(item.charges).substring(
                           0,
-                          String(item.unitCost).length - 3
+                          String(item.charges).length - 3
                         ) +
                         "," +
-                        String(item.unitCost).substring(
-                          String(item.unitCost).length - 3,
-                          String(item.unitCost).length
+                        String(item.charges).substring(
+                          String(item.charges).length - 3,
+                          String(item.charges).length
                         )
-                      : String(item.unitCost)}
+                      : String(item.charges)}
                   </td>
                   <td>
                     N
-                    {String(item.unitCost * item.quantity).length > 3
-                      ? String(item.unitCost * item.quantity).substring(
+                    {String(item.salaries).length > 3
+                      ? String(item.salaries).substring(
                           0,
-                          String(item.unitCost * item.quantity).length - 3
+                          String(item.salaries).length - 3
                         ) +
                         "," +
-                        String(item.unitCost * item.quantity).substring(
-                          String(item.unitCost * item.quantity).length - 3,
-                          String(item.unitCost * item.quantity).length
+                        String(item.salaries).substring(
+                          String(item.salaries).length - 3,
+                          String(item.salaries).length
                         )
-                      : String(item.unitCost * item.quantity)}
+                      : String(item.salaries)}
+                  </td>
+                  <td>
+                    N
+                    {String(item.others).length > 3
+                      ? String(item.others).substring(
+                          0,
+                          String(item.others).length - 3
+                        ) +
+                        "," +
+                        String(item.others).substring(
+                          String(item.others).length - 3,
+                          String(item.others).length
+                        )
+                      : String(item.others)}
                   </td>
                 </tr>
               );
@@ -86,29 +108,28 @@ function Expense() {
               <td></td>
               <td>
                 <input
-                  type="text"
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                  placeholder="Name"
+                  type="number"
+                  onChange={(e) => setCharges(e.target.value)}
+                  value={charges}
+                  placeholder="Charges"
                 />
               </td>
               <td>
                 <input
                   type="number"
-                  onChange={(e) => setQty(e.target.value)}
-                  value={qty}
-                  placeholder="Quantity"
+                  onChange={(e) => setSalaries(e.target.value)}
+                  value={salaries}
+                  placeholder="Salaries"
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  onChange={(e) => setCost(e.target.value)}
-                  value={cost}
-                  placeholder="Unit Cost"
+                  onChange={(e) => setOthers(e.target.value)}
+                  value={others}
+                  placeholder="Others"
                 />
               </td>
-              <td></td>
             </tr>
           </tbody>
         </table>

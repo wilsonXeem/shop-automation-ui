@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 function ShopDailyTransaction() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [qty, setQty] = useState();
+  const [rate, setRate] = useState("");
+  const [remarks, setRemarks] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
   const url = "http://localhost:8000/sales/";
   useEffect(() => {
@@ -13,6 +17,20 @@ function ShopDailyTransaction() {
         setData(json.sales);
       });
   }, []);
+  function handleSubmit() {
+    fetch("http://localhost:8000/sales/", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        rate: rate,
+        quantity: qty,
+        remarks: remarks,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then(() => window.location.reload());
+  }
   return (
     <>
       <div style={{ textAlign: "center" }}>
@@ -20,13 +38,13 @@ function ShopDailyTransaction() {
         <hr />
         <div style={{ width: "100%" }}>
           <button className="btn" onClick={() => navigate("/")}>
-            Back to Home
+            Go to Stock
           </button>
-          <button className="btn" onClick={() => navigate("/")}>
-            Back to Home
+          <button className="btn" onClick={() => navigate("/purchases")}>
+            Go to Purchases
           </button>
-          <button className="btn" onClick={() => navigate("/")}>
-            Back to Home
+          <button className="btn" onClick={() => navigate("/expenses")}>
+            Go to Expenses
           </button>
         </div>
         <table>
@@ -82,19 +100,37 @@ function ShopDailyTransaction() {
             <tr>
               <td></td>
               <td>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  placeholder="Name"
+                />
               </td>
               <td>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setQty(e.target.value)}
+                  value={qty}
+                  placeholder="Quantity"
+                />
               </td>
               <td>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setRate(e.target.value)}
+                  value={rate}
+                  placeholder="Rate"
+                />
               </td>
+              <td></td>
               <td>
-                <input type="text" />
-              </td>
-              <td>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setRemarks(e.target.value)}
+                  value={remarks}
+                  placeholder="Remarks"
+                />
               </td>
             </tr>
           </tbody>
@@ -102,6 +138,7 @@ function ShopDailyTransaction() {
         <div>
           <button
             className="btn"
+            onClick={handleSubmit}
             style={{ width: "30%", height: "1.5rem", fontSize: "large" }}
           >
             Submit

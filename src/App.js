@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Homepage />} />
-        <Route exact path="/purchase" element={<Purchase />} />
+        <Route exact path="/purchases" element={<Purchase />} />
         <Route exact path="/daily-transaction" element={<DailyTransaction />} />
         <Route exact path="/expenses" element={<Expense />} />
       </Routes>

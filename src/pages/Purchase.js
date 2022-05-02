@@ -7,9 +7,9 @@ function Purchase() {
   const [name, setName] = useState("");
   const [qty, setQty] = useState();
   const [cost, setCost] = useState("");
-  const purchases = data.filter(
-    (x) => x.time === new Date().toLocaleDateString()
-  );
+  // const purchases = data.filter(
+  //   (x) => x.time === new Date().toLocaleDateString()
+  // );
   // const url = "https://agroshopify.herokuapp.com/products/";
   const url = "http://localhost:8000/purchases/";
   useEffect(() => {
@@ -37,9 +37,20 @@ function Purchase() {
       <div style={{ textAlign: "center" }}>
         <h1>Purchases</h1>
         <hr />
-        <button className="btn" onClick={() => navigate("/")}>
-          Back to Home
-        </button>
+        <div style={{ width: "100%" }}>
+          <button className="btn" onClick={() => navigate("/")}>
+            Go to Stock
+          </button>
+          <button
+            className="btn"
+            onClick={() => navigate("/daily-transaction")}
+          >
+            Go to Sales
+          </button>
+          <button className="btn" onClick={() => navigate("/expenses")}>
+            Go to Expenses
+          </button>
+        </div>
         <table>
           <thead>
             <tr>
@@ -51,7 +62,7 @@ function Purchase() {
             </tr>
           </thead>
           <tbody>
-            {purchases.filter((item, i) => {
+            {data.map((item, i) => {
               return (
                 <tr key={i} onClick={() => navigate(`/salespage/${item._id}`)}>
                   <td>{i + 1}</td>
