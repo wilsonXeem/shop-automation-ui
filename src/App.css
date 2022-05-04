@@ -36,3 +36,17 @@ input {
   height: 1.5rem;
   width: 90%;
 }
+
+td {
+  font-variant: small-caps;
+}
+
+.b{
+  background-color: red;
+  border: none;
+  /* margin-left: 1rem; */
+  margin: 0px;
+  width: 80%;
+  height: 1.5rem;
+  border-radius: 10px;
+}

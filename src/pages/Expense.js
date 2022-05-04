@@ -5,7 +5,7 @@ function Expense() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [charges, setCharges] = useState("");
-  const [salaries, setSalaries] = useState();
+  const [salaries, setSalaries] = useState("");
   const [others, setOthers] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
   const url = "https://agroshopify.herokuapp.com/expenses/";
@@ -17,17 +17,21 @@ function Expense() {
       });
   }, []);
   function handleSubmit() {
-    fetch("https://agroshopify.herokuapp.com/expenses/", {
-      method: "POST",
-      body: JSON.stringify({
-        charges: charges,
-        salaries: salaries,
-        others: others,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }).then(() => window.location.reload());
+    if (charges !== "" && salaries !== "" && others !== "") {
+      fetch("https://agroshopify.herokuapp.com/expenses/", {
+        method: "POST",
+        body: JSON.stringify({
+          charges: charges,
+          salaries: salaries,
+          others: others,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then(() => window.location.reload());
+    } else {
+      alert("Fields must not be empty");
+    }
   }
   return (
     <div style={{ textAlign: "center" }}>
@@ -57,8 +61,11 @@ function Expense() {
           <tbody>
             {data.map((item, i) => {
               return (
-                <tr key={i}>
-                  <td>{i + 1}</td>
+                <tr key={i} id={item._id}>
+                  <td>
+                    {i + 1}
+                    <button className="b">X</button>
+                  </td>
                   <td>
                     N
                     {String(item.charges).length > 3

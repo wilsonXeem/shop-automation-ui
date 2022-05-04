@@ -5,7 +5,7 @@ function ShopDailyTransaction() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState("");
   const [rate, setRate] = useState("");
   const [remarks, setRemarks] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
@@ -18,18 +18,22 @@ function ShopDailyTransaction() {
       });
   }, []);
   function handleSubmit() {
-    fetch("https://agroshopify.herokuapp.com/sales/", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        rate: rate,
-        quantity: qty,
-        remarks: remarks,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }).then(() => window.location.reload());
+    if (name !== "" && qty !== "" && rate !== "" && remarks !== "") {
+      fetch("https://agroshopify.herokuapp.com/sales/", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name.toLowerCase(),
+          rate: rate,
+          quantity: qty,
+          remarks: remarks,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then(() => window.location.reload());
+    } else {
+      alert("Fields must not be empty");
+    }
   }
   return (
     <>
@@ -61,8 +65,11 @@ function ShopDailyTransaction() {
           <tbody>
             {data.map((item, i) => {
               return (
-                <tr key={i} onClick={() => navigate(`/salespage/${item._id}`)}>
-                  <td>{i + 1}</td>
+                <tr key={i} id={item._id}>
+                  <td>
+                    {i + 1}
+                    <button className="b">X</button>
+                  </td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
                   <td>

@@ -8,6 +8,7 @@ function Purchase() {
   const [qty, setQty] = useState();
   const [cost, setCost] = useState("");
   const url = "https://agroshopify.herokuapp.com/purchases/";
+  // const url = "http://localhost:8000/purchases/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -16,17 +17,21 @@ function Purchase() {
       });
   }, []);
   function handleSubmit() {
-    fetch("https://agroshopify.herokuapp.com/purchases/", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        unitCost: cost,
-        quantity: qty,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }).then(() => window.location.reload());
+    if (name !== "" && qty !== "" && cost !== "") {
+      fetch("https://agroshopify.herokuapp.com/purchases/", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name.toLowerCase(),
+          unitCost: cost,
+          quantity: qty,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then(() => window.location.reload());
+    } else {
+      alert("Fields must not be empty");
+    }
   }
   return (
     <>
@@ -60,8 +65,11 @@ function Purchase() {
           <tbody>
             {data.map((item, i) => {
               return (
-                <tr key={i} onClick={() => navigate(`/salespage/${item._id}`)}>
-                  <td>{i + 1}</td>
+                <tr key={i} id={item._id}>
+                  <td>
+                    {i + 1}
+                    <button className="b">X</button>
+                  </td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
                   <td>

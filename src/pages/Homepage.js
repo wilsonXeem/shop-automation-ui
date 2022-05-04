@@ -5,10 +5,10 @@ function ShopHomepage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState("");
   const [cost, setCost] = useState("");
-  // const url = "https://agroshopify.herokuapp.com/products/";
   const url = "https://agroshopify.herokuapp.com/products/";
+  // const url = "http://localhost:8000/products/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -17,21 +17,31 @@ function ShopHomepage() {
       });
   }, []);
   function handleSubmit() {
-    fetch("https://agroshopify.herokuapp.com/products/", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        unitCost: cost,
-        quantity: qty,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }).then(() => window.location.reload());
+    if (name !== "" && cost !== "" && qty !== "") {
+      fetch("https://agroshopify.herokuapp.com/products/", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name.toLowerCase(),
+          unitCost: cost,
+          quantity: qty,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then(() => window.location.reload());
+    } else {
+      alert("Fields must not be empty");
+    }
   }
+
+  function handleDelete(id) {
+    fetch(`https://agroshopify.herokuapp.com/products/${id}`, {
+      method: "DELETE",
+    }).then(() => window.location.reload());
+  } 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Available Stock</h1>
+      <h1>Stock</h1>
       <hr />
       <div style={{ width: "100%" }}>
         <button className="btn" onClick={() => navigate("/daily-transaction")}>
@@ -58,8 +68,16 @@ function ShopHomepage() {
           <tbody>
             {data.map((item, i) => {
               return (
-                <tr key={i}>
-                  <td>{i + 1}</td>
+                <tr key={i} id={item._id}>
+                  <td>
+                    {i + 1}{" "}
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="b"
+                    >
+                      X
+                    </button>
+                  </td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
                   <td>
@@ -113,7 +131,7 @@ function ShopHomepage() {
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   onChange={(e) => setCost(e.target.value)}
                   value={cost}
                   placeholder="Unit Cost"
