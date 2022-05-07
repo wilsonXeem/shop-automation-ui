@@ -21,7 +21,7 @@ function Purchase() {
       fetch("https://agroshopify.herokuapp.com/purchases/", {
         method: "POST",
         body: JSON.stringify({
-          name: name.toLowerCase(),
+          name: name.toLowerCase().trim(),
           unitCost: cost,
           quantity: qty,
         }),
@@ -37,7 +37,7 @@ function Purchase() {
     fetch(`https://agroshopify.herokuapp.com/purchases/${id}`, {
       method: "DELETE",
     }).then(() => window.location.reload());
-  } 
+  }
   return (
     <>
       <div style={{ textAlign: "center" }}>

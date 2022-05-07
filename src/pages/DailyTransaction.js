@@ -22,7 +22,7 @@ function ShopDailyTransaction() {
       fetch("https://agroshopify.herokuapp.com/sales/", {
         method: "POST",
         body: JSON.stringify({
-          name: name.toLowerCase(),
+          name: name.toLowerCase().trim(),
           rate: rate,
           quantity: qty,
           remarks: remarks,

@@ -21,7 +21,7 @@ function ShopHomepage() {
       fetch("https://agroshopify.herokuapp.com/products/", {
         method: "POST",
         body: JSON.stringify({
-          name: name.toLowerCase(),
+          name: name.toLowerCase().trim(),
           unitCost: cost,
           quantity: qty,
         }),
