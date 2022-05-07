@@ -33,6 +33,11 @@ function Purchase() {
       alert("Fields must not be empty");
     }
   }
+  function handleDelete(id) {
+    fetch(`https://agroshopify.herokuapp.com/purchases/${id}`, {
+      method: "DELETE",
+    }).then(() => window.location.reload());
+  } 
   return (
     <>
       <div style={{ textAlign: "center" }}>
@@ -68,7 +73,12 @@ function Purchase() {
                 <tr key={i} id={item._id}>
                   <td>
                     {i + 1}
-                    <button className="b">X</button>
+                    <button
+                      className="b"
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      X
+                    </button>
                   </td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>

@@ -33,6 +33,11 @@ function Expense() {
       alert("Fields must not be empty");
     }
   }
+  function handleDelete(id) {
+    fetch(`https://agroshopify.herokuapp.com/expenses/${id}`, {
+      method: "DELETE",
+    }).then(() => window.location.reload());
+  }
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Expenses</h1>
@@ -64,7 +69,12 @@ function Expense() {
                 <tr key={i} id={item._id}>
                   <td>
                     {i + 1}
-                    <button className="b">X</button>
+                    <button
+                      className="b"
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      X
+                    </button>
                   </td>
                   <td>
                     N
