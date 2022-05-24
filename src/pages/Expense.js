@@ -8,7 +8,7 @@ function Expense() {
   const [salaries, setSalaries] = useState("");
   const [others, setOthers] = useState("");
   // const url = "https://agroshopify.herokuapp.com/products/";
-  const url = "https://agroshopify.herokuapp.com/expenses/";
+  const url = "https://shopautomation.herokuapp.com/expenses/";
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -18,7 +18,7 @@ function Expense() {
   }, []);
   function handleSubmit() {
     if (charges !== "" && salaries !== "" && others !== "") {
-      fetch("https://agroshopify.herokuapp.com/expenses/", {
+      fetch("https://shopautomation.herokuapp.com/expenses/", {
         method: "POST",
         body: JSON.stringify({
           charges: charges,
@@ -34,7 +34,7 @@ function Expense() {
     }
   }
   function handleDelete(id) {
-    fetch(`https://agroshopify.herokuapp.com/expenses/${id}`, {
+    fetch(`https://shopautomation.herokuapp.com/expenses/${id}`, {
       method: "DELETE",
     }).then(() => window.location.reload());
   }
